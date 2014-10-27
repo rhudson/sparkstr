@@ -21,11 +21,11 @@ resolvers ++= Seq(
 // http://www.scala-sbt.org/release/docs/Getting-Started/Library-Dependencies
 libraryDependencies ++= {
   Seq(
-    "org.apache.spark" %% "spark-core" % "0.9.0-incubating" % "provided",
-    "org.apache.spark" %% "spark-streaming" % "0.9.0-incubating" % "provided",
+    "org.apache.spark" %% "spark-core" % "1.0.0" % "provided",
+    "org.apache.spark" %% "spark-streaming" % "1.0.0" % "provided",
     "org.slf4j" % "slf4j-log4j12" % "1.7.2",
     // Linear algebra
-    "org.scalanlp" % "breeze_2.10" % "0.7",
+    "org.scalanlp" % "breeze_2.10" % "0.8",
     // Native libraries are not included by default (as of 0.7)
     // Native libraries greatly improve performance, but increase jar sizes.
     //"org.scalanlp" % "breeze-natives_2.10" % "0.7",

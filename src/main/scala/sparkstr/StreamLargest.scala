@@ -4,6 +4,7 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming.dstream.DStream
+import org.apache.spark.SparkConf
 
 import scala.collection.mutable.{Buffer, SynchronizedQueue}
 
@@ -21,10 +22,11 @@ object StreamLargest {
     val Array(master, batchDuration) = args
 
     // Create the context with the given batchDuration.
-    val ssc = new StreamingContext(master, "StreamLargest", Seconds(batchDuration.toInt), 
-      System.getenv("SPARK_HOME"), Seq(System.getenv("SPARK_EXAMPLES_JAR")))
+    val sparkConf = new SparkConf().setAppName("StreamLargest").setMaster(master)
+    val ssc = new StreamingContext(sparkConf, Seconds(batchDuration.toInt))
     ssc.checkpoint("./output")
-
+    //ssc.sparkContext.addJar("/work/sparkstr-assembly-0.1.jar")
+    
     // Create the queue through which RDDs can be pushed to a QueueInputDStream.
     val rddQueue = new SynchronizedQueue[RDD[StreamLargestData]]()
     
